@@ -3,6 +3,17 @@
 Revamped version of the OpenSymphony workflow project. Built using a combination of Jcenter Mirror and
 uploaded jar.
 
+[ ![Download](https://api.bintray.com/packages/trunkplatform/osworkflow/osworkflow/images/download.svg) ](https://bintray.com/trunkplatform/osworkflow/osworkflow/_latestVersion)
+
+## Build
+
+Update your $USERHOME/.gradle/gradle.properties with your Bintray username and API key:
+
+    bintrayUser=
+    bintrayApiKey=
+
+
+
 ## Features
 
 Removed features:

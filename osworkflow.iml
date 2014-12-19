@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id="osworkflow" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="com.trunkplatform" external.system.module.version="0.0.1" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web Gradle : osworkflow-0.0.1.war">
+      <configuration>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
@@ -24,8 +37,6 @@
     <orderEntry type="library" exported="" name="Gradle: jgoodies:looks:1.2.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: oro:oro:2.0.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: velocity:velocity-dep:1.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: xmlunit:xmlunit:1.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: opensymphony:xwork:1.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jdom:jdom:1.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xerces:xmlParserAPIs:2.6.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xom:xom:1.0b3" level="project" />
@@ -43,8 +54,6 @@
     <orderEntry type="library" exported="" name="Gradle: javax.sql:jdbc-stdext:2.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jgraph:jgraph:1.0.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: mckoi:mckoi:1.0.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.ofbiz.ofbcore:ofbcore-entity:unknown" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.ofbiz.ofbcore:ofbcore-share:unknown" level="project" />
     <orderEntry type="library" exported="" name="Gradle: opensymphony:oscore:2.2.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: opensymphony:osuser:1.0-dev-10Sep06" level="project" />
     <orderEntry type="library" exported="" name="Gradle: prevayler:prevayler:2.02.005" level="project" />
@@ -52,9 +61,6 @@
     <orderEntry type="library" exported="" name="Gradle: simple-jndi:simple-jndi:unknown" level="project" />
     <orderEntry type="library" exported="" name="Gradle: stax:stax:1.2.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: net.sf.squirrel-sql.thirdparty-non-maven:ostermiller-syntax:1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: mysql:mysql-connector-java:5.1.30" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.maven.plugins:maven-jar-plugin:2.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.maven.plugins:maven-compiler-plugin:2.0.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.ant:ant:1.7.1" level="project" />
@@ -98,14 +104,17 @@
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-beans:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-jdbc:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-tx:3.2.8.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: opensymphony:webwork:1.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jaxen:jaxen:1.1-beta-5" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: wsdl4j:wsdl4j:1.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.mail:mail:1.4.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-context:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-aop:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-expression:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: bsf:bsf:unknown" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: bsh:bsh:1.2b7" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: opensymphony:webwork:1.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: opensymphony:xwork:1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:servlet-api:2.5" level="project" />
   </component>
 </module>
