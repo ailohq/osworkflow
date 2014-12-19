@@ -1,0 +1,13 @@
+<mappings>
+  <mapping>
+    <property name="initialActions" componentType="com.opensymphony.workflow.loader.ActionDescriptor" />
+    <property name="globalActions" componentType="com.opensymphony.workflow.loader.ActionDescriptor" />
+    <property name="commonActions" keyType="java.lang.Integer" componentType="com.opensymphony.workflow.loader.ActionDescriptor" />
+    <property name="registers" componentType="com.opensymphony.workflow.loader.RegisterDescriptor" />
+    <property name="splits" componentType="com.opensymphony.workflow.loader.SplitDescriptor" />
+    <property name="joins" componentType="com.opensymphony.workflow.loader.JoinDescriptor" />
+    <property name="steps" componentType="com.opensymphony.workflow.loader.StepDescriptor" />
+    <property name="metaAttributes" keyType="java.lang.String" componentType="java.lang.String" />
+    <property name="triggerFunctions" keyType="java.lang.Integer" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+  </mapping>
+</mappings>

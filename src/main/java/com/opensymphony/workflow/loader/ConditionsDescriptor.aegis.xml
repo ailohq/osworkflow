@@ -1,0 +1,5 @@
+<mappings>
+  <mapping>
+    <property name="conditions" componentType="com.opensymphony.workflow.loader.ConditionDescriptor" />
+  </mapping>
+</mappings>

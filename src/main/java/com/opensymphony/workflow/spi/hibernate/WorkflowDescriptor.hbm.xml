@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<!-- com.opensymphony.workflow.loader.ResultDescriptor already added -->
+<hibernate-mapping default-cascade="all">
+	<!-- com.opensymphony.workflow.loader.Workflows -->
+	<class name="com.opensymphony.workflow.spi.hibernate.WorkflowName" >
+		<id name="workflowName" unsaved-value="any">
+			<generator class="assigned"/>
+		</id>
+		<many-to-one name="workflowDescriptor" cascade="save-update" />
+	</class>
+
+	<!-- com.opensymphony.workflow.loader.AbstractDescriptor root -->
+	<class name="com.opensymphony.workflow.loader.AbstractDescriptor" >
+		<id name="entityId" unsaved-value="0">
+			<generator class="native"/>
+		</id>
+		
+		<!-- discriminator column="class"/-->
+		<property name="id" column="id" />
+		<many-to-one name="parent" class="com.opensymphony.workflow.loader.AbstractDescriptor" cascade="none"/>
+		<!-- com.opensymphony.workflow.loader.ActionDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.ActionDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="view" column="viewProperty" />
+			<property name="name" column="name"/>
+			<property name="finish" column="finish"/>
+			<property name="autoExecute" column="autoExecute" />
+			<property name="common" column="common"/>
+			<many-to-one name="restriction" />
+			<many-to-one name="unconditionalResult"/>
+			<list name="conditionalResults" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentActionDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ConditionalResultDescriptor" />					
+			</list>			
+			<list name="validators" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentActionDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ValidatorDescriptor" />					
+			</list>			
+			<list name="postFunctions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentActionDescrPost"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>			
+			<list name="preFunctions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentActionDescrPre"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>						
+			<map name="metaAttributes" table="actionMetaAttributes" lazy="false" >
+				<key column="entityCode"/>
+				<index column="keyName" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.ResultDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.ResultDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="owner" />
+			<property name="oldStatus" access="field"/>
+			<property name="displayName" access="field"/>
+			<property name="status"/>
+			<property name="split"/>
+			<property name="step" />
+			<property name="join" column="join_id" />
+			<list name="postFunctions" lazy="false" cascade="all-delete-orphan" access="field">
+				<key column="parentResultDescrPost"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>			
+			<list name="preFunctions" lazy="false" cascade="all-delete-orphan" access="field">
+				<key column="parentResultDescrPre"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>						
+			<!-- com.opensymphony.workflow.loader.ConditionalResultDescriptor -->
+			<joined-subclass name="com.opensymphony.workflow.loader.ConditionalResultDescriptor">
+				<key column="conditionalResultDescriptorId"/>
+				<list name="conditions" lazy="false" access="field" cascade="all-delete-orphan">
+					<key column="parentConditionalResultDesc"/>
+					<index column="listOrder"/>
+					<one-to-many class="com.opensymphony.workflow.loader.ConditionsDescriptor" />					
+				</list>
+			</joined-subclass>
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.ConditionDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.ConditionDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="name" column="name" />
+			<property name="type" column="type" />
+			<property name="negate" column="negate" />
+			<map name="args" table="conditionsargs" lazy="false" access="field">
+				<key column="entityCode"/>
+				<index column="name" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.ConditionsDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.ConditionsDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="type" column="type" />
+			
+			<list name="conditions" lazy="false" cascade="all-delete-orphan">
+				<key column="parentConditionsDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.AbstractDescriptor" />					
+			</list>
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.FunctionDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.FunctionDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="name" column="name" />
+			<property name="type" column="type" />
+			<map name="args" table="functionsargs" lazy="false" access="field">
+				<key column="entityCode"/>
+				<index column="name" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.JoinDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.JoinDescriptor">
+			<key column="abstractDescriptorId"/>
+			<many-to-one name="result" column="result" class="com.opensymphony.workflow.loader.ResultDescriptor"/>
+			<list name="conditions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentJoinDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ConditionsDescriptor" />					
+			</list>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.PermissionDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.PermissionDescriptor">
+			<key column="abstractDescriptorId"/>
+			<many-to-one name="restriction" class="com.opensymphony.workflow.loader.RestrictionDescriptor" />
+			<property name="name" column="name" />
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.RegisterDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.RegisterDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="type" column="type" />
+			<property name="variableName" column="variableName" />
+			<map name="args" table="registersargs" lazy="false" access="field">
+				<key column="entityCode"/>
+				<index column="name" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.RestrictionDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.RestrictionDescriptor">
+			<key column="abstractDescriptorId"/>
+			<list name="conditions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentRestrictionDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ConditionsDescriptor" />					
+			</list>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.SplitDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.SplitDescriptor">
+			<key column="abstractDescriptorId"/>
+			<list name="results" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentSplitDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ResultDescriptor" />					
+			</list>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.StepDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.StepDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="name" />
+			<property name="hasActions" access="field" />
+			<list name="actions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentStepDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ActionDescriptor" />					
+			</list>			
+			<list name="permissions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentStepDescriptor"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.PermissionDescriptor" />					
+			</list>			
+			<list name="commonActions" table="commonactions2step" lazy="false" access="field">
+				<key column="parentStepDescriptor"/>
+				<index column="listOrder"/>
+				<element column="value" type="integer"/>
+			</list>			
+			<list name="postFunctions" lazy="false" cascade="all-delete-orphan">
+				<key column="parentStepDescriptorPost"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>			
+			<list name="preFunctions" lazy="false" cascade="all-delete-orphan">
+				<key column="parentStepDescriptorPre"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</list>			
+			<map name="metaAttributes" table="stepMetaAttributes" lazy="false" >
+				<key column="entityCode"/>
+				<index column="keyName" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.ValidatorDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.ValidatorDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="name" column="name" />
+			<property name="type" column="type" />
+			<map name="args" table="validatorsargs" lazy="false" access="field">
+				<key column="entityCode"/>
+				<index column="name" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>			
+		</joined-subclass>
+		<!-- com.opensymphony.workflow.loader.WorkflowDescriptor -->
+		<joined-subclass name="com.opensymphony.workflow.loader.WorkflowDescriptor">
+			<key column="abstractDescriptorId"/>
+			<property name="name" />
+			<many-to-one name="globalConditions" class="com.opensymphony.workflow.loader.ConditionsDescriptor" access="field"/>
+			<list name="commonActionsList" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescrCommonList"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ActionDescriptor" />					
+			</list>			
+			<list name="globalActions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescGlobal"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ActionDescriptor" />					
+			</list>			
+			<list name="initialActions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescrInitial"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ActionDescriptor" />					
+			</list>			
+			<list name="joins" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.JoinDescriptor" />					
+			</list>			
+			<list name="registers" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.RegisterDescriptor" />
+			</list>			
+			<list name="splits" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.SplitDescriptor" />					
+			</list>			
+			<list name="steps" lazy="false" outer-join="true" batch-size="10" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescr"/>
+				<index column="listOrder"/>
+				<one-to-many class="com.opensymphony.workflow.loader.StepDescriptor" />					
+			</list>			
+			<map name="commonActions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescrCommonMap"/>
+				<index column="id" type="integer"/>
+				<one-to-many class="com.opensymphony.workflow.loader.ActionDescriptor" />					
+			</map>			
+			<map name="metaAttributes" table="workflowMetaAttributes" lazy="false" access="field">
+				<key column="entityCode"/>
+				<index column="keyName" type ="string"/>
+				<element column="value" type="com.opensymphony.workflow.loader.NotNullStringType" length="4000"/>
+			</map>
+			<map name="timerFunctions" lazy="false" access="field" cascade="all-delete-orphan">
+				<key column="parentWorkflowDescr"/>
+				<index column="id" type="integer"/>
+				<one-to-many class="com.opensymphony.workflow.loader.FunctionDescriptor" />					
+			</map>						
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
+

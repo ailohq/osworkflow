@@ -1,0 +1,10 @@
+<mappings>
+  <mapping>
+    <property name="actions" componentType="com.opensymphony.workflow.loader.ActionDescriptor" />
+    <property name="commonActions" componentType="com.opensymphony.workflow.loader.ActionDescriptor" />
+    <property name="preFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+    <property name="postFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+    <property name="metaAttributes" keyType="java.lang.String" componentType="java.lang.String" />
+    <property name="permissions" componentType="java.lang.String" />
+  </mapping>
+</mappings>

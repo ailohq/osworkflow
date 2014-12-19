@@ -1,0 +1,7 @@
+<mappings>
+  <mapping>
+    <property name="validators" componentType="com.opensymphony.workflow.loader.ValidatorDescriptor" />
+    <property name="preFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+    <property name="postFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+  </mapping>
+</mappings>

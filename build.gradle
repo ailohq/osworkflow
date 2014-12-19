@@ -1,0 +1,68 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.trunkplatform'
+version = '0.0.1'
+
+description = """"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+
+    maven { url "http://jcenter.bintray.com" }
+    maven { url "http://dl.bintray.com/trunkplatform/osworkflow" }
+    maven { url "http://gmultipart.googlecode.com/svn/repo/m2" }
+}
+dependencies {
+    compile group: 'bsf', name: 'bsf', version:'unknown'
+    compile group: 'bsh', name: 'bsh', version:'1.2b7'
+    compile group: 'cglib', name: 'cglib', version:'unknown'
+    compile group: 'commons-beanutils', name: 'commons-beanutils', version:'1.6'
+    compile group: 'commons-collections', name: 'commons-collections', version:'2.1'
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version:'unknown'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.0'
+    compile group: 'commons-logging', name: 'commons-logging', version:'unknown'
+    compile group: 'commons-pool', name: 'commons-pool', version:'unknown'
+    compile group: 'ojb', name: 'db-ojb', version:'1.0.rc5'
+    compile group: 'dom4j', name: 'dom4j', version:'1.4'
+    compile group: 'net.sf.ehcache', name: 'ehcache', version:'unknown'
+    compile group: 'jgoodies', name: 'forms', version:'1.0.4'
+    compile group: 'foxtrot', name: 'foxtrot', version:'2.0'
+    compile group: 'glue_stub', name: 'glue_stub', version:'unknown'
+    compile group: 'jalopy', name: 'jalopy', version:'1.0b10'
+    compile group: 'jalopy', name: 'jalopy-ant', version:'0.6.1'
+    compile group: 'jaxen', name: 'jaxen', version:'1.1-beta-5'
+    compile group: 'jdbc', name: 'jdbc', version:'2.0'
+    compile group: 'org.jdom', name: 'jdom', version:'1.1'
+    compile group: 'jgraph', name: 'jgraph', version:'1.0.6'
+    compile group: 'javax.jms', name: 'jms', version:'1.1'
+    compile group: 'javax.net', name: 'jnet', version:'unknown'
+    compile group: 'javax.transaction', name: 'jta', version:'unknown'
+    compile group: 'jgoodies', name: 'looks', version:'1.2.2'
+    compile group: 'mckoi', name: 'mckoi', version:'1.0.2'
+    compile group: 'oro', name: 'oro', version:'2.0.6'
+    compile group: 'opensymphony', name: 'oscore', version:'2.2.4'
+    compile group: 'opensymphony', name: 'osuser', version:'1.0-dev-10Sep06'
+    compile group: 'prevayler', name: 'prevayler', version:'2.02.005'
+    compile group: 'opensymphony', name: 'propertyset', version:'1.5'
+    compile group: 'simple-jndi', name: 'simple-jndi', version:'unknown'
+    compile group: 'stax', name: 'stax', version:'1.2.0'
+    compile group: 'stax', name: 'stax-api', version:'1.0'
+    compile group: 'net.sf.squirrel-sql.thirdparty-non-maven', name: 'ostermiller-syntax', version:'1.1.1'
+    compile group: 'velocity', name: 'velocity-dep', version:'1.4'
+    compile group: 'opensymphony', name: 'webwork', version:'1.4'
+    compile group: 'wsdl4j', name: 'wsdl4j', version:'1.4'
+    compile group: 'xmlunit', name: 'xmlunit', version:'1.0'
+    compile group: 'opensymphony', name: 'xwork', version:'1.0'
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.30'
+    compile group: 'javax.mail', name: 'mail', version:'1.4.7'
+    compile group: 'log4j', name: 'log4j', version:'1.2.17'
+    compile group: 'org.springframework', name: 'spring-context', version:'3.2.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version:'3.2.8.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version:'3.2.8.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-core', version:'3.6.10.Final'
+
+    compile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
+}

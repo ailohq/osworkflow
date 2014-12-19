@@ -1,0 +1,6 @@
+<mappings>
+  <mapping>
+    <property name="genericErrors" componentType="java.lang.String"/>
+    <property name="errors" keyType="java.lang.String" componentType="java.lang.String"/>
+  </mapping>
+</mappings>

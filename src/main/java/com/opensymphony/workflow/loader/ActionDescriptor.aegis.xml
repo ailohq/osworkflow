@@ -1,0 +1,9 @@
+<mappings>
+  <mapping>
+    <property name="validators" componentType="com.opensymphony.workflow.loader.ValidatorDescriptor" />
+    <property name="preFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+    <property name="postFunctions" componentType="com.opensymphony.workflow.loader.FunctionDescriptor" />
+    <property name="metaAttributes" keyType="java.lang.String" componentType="java.lang.String" />
+    <property name="conditionalResults" componentType="com.opensymphony.workflow.loader.ConditionalResultDescriptor" />
+  </mapping>
+</mappings>

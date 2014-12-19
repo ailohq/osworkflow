@@ -1,0 +1,7 @@
+<mappings>
+  <mapping>
+    <property name="variableResolver" ignore="true"/>
+    <property name="workflowStore" ignore="true"/>
+    <property name="persistenceArgs" ignore="true"/>
+  </mapping>
+</mappings>
