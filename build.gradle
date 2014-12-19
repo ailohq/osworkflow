@@ -7,9 +7,9 @@ plugins {
 }
 
 group = 'com.trunkplatform'
-version = '0.0.1'
+version = '2.7.1'
 
-description = "stripped down version of the deprecated OpenSymphony Workflow"
+description = "stripped down version of the deprecated OpenSymphony Workflow based on 2.7.0 code base"
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
