@@ -6,6 +6,32 @@ uploaded jar.
 <a href='https://bintray.com/trunkplatform/osworkflow/osworkflow/view?source=watch' alt='Get automatic notifications about new "osworkflow" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 [ ![Download](https://api.bintray.com/packages/trunkplatform/osworkflow/osworkflow/images/download.svg) ](https://bintray.com/trunkplatform/osworkflow/osworkflow/_latestVersion)
 
+## Usage
+
+### Maven
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/trunkplatform/osworkflow</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>osworkflow</groupId>
+            <artifactId>osworkflow</artifactId>
+            <version>2.7.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+### Gradle
+
 ## Build
 
 Update your $USERHOME/.gradle/gradle.properties with your Bintray username and API key:
@@ -23,13 +49,13 @@ Upload a new version:
 
 ## Features
 
-Removed features:
+To ease maintenance, removed support for the following workflow features:
 
  * EJB
  * SOAP
  * Ofbiz
 
-## Dependencies
+## Library Dependencies
 
 Certain guesses were made in regards to the versions of certain dependencies which were available in JCenter:
 

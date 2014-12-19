@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The main workflow element. A workflow includes a set of meta properties that are global, as well as global registers
+and trigger functions. It also defines a set of initial actions that are available to kick off the workflow.
+The global actions are actions that can be executed from any step. They are available to all steps.
+common-actions are actions that can be reused in steps. They are specified here, and a step can optionally
+refer to a common-action to make it available. Note that all actions id's must be globally unique.
+
+A workflow consists of a number of steps, split definitions that determine the states to move to within a split,
+and join definitions to determine the conditions and steps for a join.
+-->
+<!ELEMENT workflow (meta*, registers?, trigger-functions?, global-conditions?, initial-actions, global-actions?, common-actions?, steps, splits?, joins?)>
+<!--
+An action that can be executed. The action id must be unique for the entire workflow definition, and
+not just within the enclosing step.
+
+Attributes:
+
+id: a unique ID in the workflow descriptor. Note that ID's have to be globally unique, and not just within a step's
+actions.
+
+name: a name for the action
+
+view: a view name for the action
+
+auto: can be true or false. If true, then the action is executed automatically when the following conditions
+are met:
+
+- the workflow enters the step that this action is in
+- all the conditions and restrictions for the action are satisfied
+
+Note that within a step, only ONE auto action is performed per workflow transition. So if more than one
+action satisfies the above criteria, only the first match (in xml file order) is matches.
+
+finish: Whether this action is a terminal one. A terminal action causes all current steps to be ended and
+moved to history, and the workflow instance status set to COMPLETED.
+
+Used in: actions
+-->
+<!ELEMENT action (meta*, restrict-to? , validators?, pre-functions?, results, post-functions?)>
+<!ATTLIST action
+	id CDATA #REQUIRED
+	name CDATA #REQUIRED
+  view CDATA #IMPLIED
+  auto (TRUE | FALSE | true | false) #IMPLIED
+  finish (TRUE | FALSE | true | false) #IMPLIED
+>
+
+<!--
+	A common (shared) action reference that references an action defined in the 'common-actions' element
+
+Used in: actions
+-->
+<!ELEMENT common-action (#PCDATA)>
+<!ATTLIST common-action
+	id CDATA #REQUIRED
+>
+
+<!--
+A list of zero or more common-actions and a list of zero or more actions for the enclosing step.
+Note that you must define one or the other, an actions element with neither will be considered
+invalid.
+Used in: step
+-->
+<!ELEMENT actions (common-action*, action*)>
+<!--
+An argument to a function. The value of the argument is interpolated,
+so if the variable foo equals "bar", then the value "test ${foo}" will be
+read as "test bar".
+
+Used in: function
+-->
+<!ELEMENT arg (#PCDATA)>
+<!ATTLIST arg
+	name CDATA #REQUIRED
+>
+
+<!--
+Holds one or more condition elements and defined if AND or OR logic
+should be used to evaluate them all together.
+
+Use in: join, restrict-to, result
+-->
+<!ELEMENT conditions (conditions | condition)*>
+<!ATTLIST conditions
+	type (AND | OR) #IMPLIED
+>
+<!--
+A condition.
+
+Used in: conditions
+-->
+<!ELEMENT condition (arg*)>
+<!ATTLIST condition
+	type CDATA #REQUIRED
+  id CDATA #IMPLIED
+  negate CDATA #IMPLIED
+  name CDATA #IMPLIED
+>
+<!--
+A group of permissions that are outside the scope of workflow but
+are related to the entity attached to the workflow.
+
+Used in: step
+-->
+<!ELEMENT external-permissions (permission+)>
+<!--
+A function that is executed automatically by OSWorkflow.
+See documentation for what arguments (if any) are required
+for the function type you choose.
+
+Used in: pre-functions, post-functions
+-->
+<!ELEMENT function (arg*)>
+<!ATTLIST function
+	type CDATA #REQUIRED
+  id CDATA #IMPLIED
+  name CDATA #IMPLIED
+>
+<!--
+A list of global actions that can be excuted on any step.
+
+Used in: workflow
+-->
+<!ELEMENT global-actions (action+)>
+
+
+<!--
+A list of initialization actions that can take place before any state
+is given to a workflow instance.
+
+Used in: workflow
+-->
+<!ELEMENT initial-actions (action+)>
+
+<!--
+A list of common (shared) actions that can be included in any step by simply declaring an action
+tag with an id attribute and no action body. This allows for the refactoring of actions that are included
+in multiple steps.
+
+Used in: workflow
+-->
+<!ELEMENT common-actions (action+)>
+
+<!--
+A place where two or more current states can transition in to a single,
+new current state. The unconditional-result MUST be a real step/status
+combo, not another join or split. The join does not take place until the
+conditions evaluate to true.
+
+Used in: joins
+-->
+<!ELEMENT join (conditions, unconditional-result)>
+<!ATTLIST join
+	id CDATA #REQUIRED
+>
+<!--
+A list of join elements.
+
+Used in: workflow
+-->
+<!ELEMENT joins (join*)>
+<!--
+A static meta property of the workflow, action, or step.
+
+Used in: workflow, step, action
+-->
+<!ELEMENT meta (#PCDATA)>
+<!ATTLIST meta
+	name CDATA #REQUIRED
+>
+<!--
+An external permission.
+
+Used in: external-permissions
+-->
+<!ELEMENT permission (restrict-to)>
+<!ATTLIST permission
+	name CDATA #REQUIRED
+  id CDATA #IMPLIED
+>
+<!--
+A list of functions that are called after the transition has been made
+from one state in the workflow to a new state.
+
+Used in: action, result, unconditional-result
+-->
+<!ELEMENT post-functions (function+)>
+<!--
+A list of functions that are called before the transition has been made
+from one state in the workflow to a new state.
+
+Used in: action, result, unconditional-result
+-->
+<!ELEMENT pre-functions (function+)>
+<!--
+A class that puts a variable in the scope of all functions and validators.
+
+Used in: registers
+-->
+<!ELEMENT register (arg*)>
+<!ATTLIST register
+	type CDATA #REQUIRED
+	variable-name CDATA #REQUIRED
+  id CDATA #IMPLIED
+>
+<!--
+A list of registers.
+
+Used in: workflow
+-->
+<!ELEMENT registers (register+)>
+<!--
+A restriction for actions and permissions. It can be based on group
+membership, as well as the current workflow status. Also, it can
+restrict based on if the caller is the owner or not.
+
+Used in: action, permission
+-->
+<!ELEMENT restrict-to (conditions?)>
+<!--
+A conditional result of an action. The result only happens if the
+beanshell evaluation of "condition" is true.
+
+Used in: results
+-->
+<!ELEMENT result (conditions, validators?, pre-functions?, post-functions?)>
+<!ATTLIST result
+	old-status CDATA #REQUIRED
+	status CDATA #IMPLIED
+	step CDATA #IMPLIED
+	owner CDATA #IMPLIED
+	split CDATA #IMPLIED
+  join CDATA #IMPLIED
+  due-date CDATA #IMPLIED
+  id CDATA #IMPLIED
+  display-name CDATA #IMPLIED
+>
+<!--
+A list of optional conditional results and a single uncondition result.
+
+Used in: action
+-->
+<!ELEMENT results (result*, unconditional-result)>
+<!--
+A place where one current state can transition in to
+one or more current states. The result of all these new states
+must be a real step/status combo, NOT another split or a join.
+
+Used in: splits
+-->
+<!ELEMENT split (unconditional-result+)>
+<!ATTLIST split
+	id CDATA #REQUIRED
+>
+<!--
+List of split elements.
+
+Used in: workflow
+-->
+<!ELEMENT splits (split+)>
+<!--
+A unique step in the workflow (id must be unique among steps).
+
+Used in: steps
+-->
+<!ELEMENT step (meta*, pre-functions?, external-permissions?, actions?, post-functions?)>
+<!ATTLIST step
+	id CDATA #REQUIRED
+	name CDATA #REQUIRED
+>
+<!--
+A list of steps contained in this workflow definition.
+
+Used in: workflow
+-->
+<!ELEMENT steps (step+)>
+<!--
+A result that has no conditions. If all conditional results fail, this is the
+default result.
+-->
+<!ELEMENT unconditional-result (validators?, pre-functions?, post-functions?)>
+<!ATTLIST unconditional-result
+	old-status CDATA #REQUIRED
+	status CDATA #IMPLIED
+	step CDATA #IMPLIED
+	owner CDATA #IMPLIED
+	split CDATA #IMPLIED
+	join CDATA #IMPLIED
+  due-date CDATA #IMPLIED
+  id CDATA #IMPLIED
+  display-name CDATA #IMPLIED
+>
+<!--
+A function that has a unique ID and is called by an external job scheduler.
+
+Used in: trigger-functions
+-->
+<!ELEMENT trigger-function (function)>
+<!ATTLIST trigger-function
+	id CDATA #REQUIRED
+>
+<!--
+A list of trigger functions.
+
+Used in: workflow
+-->
+<!ELEMENT trigger-functions (trigger-function+)>
+<!--
+A class or script that validates user input.
+See documentation for what arguments (if any) are required
+for the function type you choose.
+
+Used in: validators
+-->
+<!ELEMENT validator (arg*)>
+<!ATTLIST validator
+	type CDATA #REQUIRED
+  name CDATA #IMPLIED
+  id CDATA #IMPLIED
+>
+<!--
+A list of validators.
+
+Used in: action, intial-step, result, unconditional-result
+-->
+<!ELEMENT validators (validator+)>
+
+<!--
+A list of global condition that are checked for every action.
+
+Used in: workflow
+-->
+<!ELEMENT global-conditions (conditions?)>
+	

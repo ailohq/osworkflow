@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  To refer to this DTD in your XML file, use the following declaration:
+<!DOCTYPE entity-config PUBLIC "-//OFBiz//DTD Entity Engine Config//EN" "http://www.ofbiz.org/dtds/entity-config.dtd">
+-->
+
+<!--
+ *  Copyright (c) 2001 The Open For Business Project - www.ofbiz.org
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a 
+ *  copy of this software and associated documentation files (the "Software"), 
+ *  to deal in the Software without restriction, including without limitation 
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ *  and/or sell copies of the Software, and to permit persons to whom the 
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included 
+ *  in all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+ *  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+ *  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+ *  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
+ *  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT 
+ *  OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR 
+ *  THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ *This is the DTD for the Open For Business Entity Engine configuration XML file.
+-->
+
+<!-- ====================== Root Element ======================= -->
+<!ELEMENT entity-config ( resource-loader+, transaction-factory, delegator+,
+        entity-model-reader+, entity-group-reader+, field-type+, datasource+ )>
+
+<!ELEMENT resource-loader EMPTY>
+<!ATTLIST resource-loader
+    name CDATA #REQUIRED
+    class CDATA #REQUIRED
+    prepend-env CDATA #IMPLIED
+    prefix CDATA #IMPLIED
+>
+
+<!ELEMENT transaction-factory ( user-transaction-jndi?, transaction-manager-jndi? )>
+<!ATTLIST transaction-factory 
+    class CDATA #REQUIRED
+>
+    <!ELEMENT user-transaction-jndi EMPTY>
+    <!ATTLIST user-transaction-jndi 
+        jndi-server-name CDATA #REQUIRED
+        jndi-name CDATA #REQUIRED
+    >
+    <!ELEMENT transaction-manager-jndi EMPTY>
+    <!ATTLIST transaction-manager-jndi 
+        jndi-server-name CDATA #REQUIRED
+        jndi-name CDATA #REQUIRED
+    >
+
+<!ELEMENT delegator (group-map+)>
+<!ATTLIST delegator
+    name CDATA #REQUIRED
+    entity-model-reader CDATA #REQUIRED
+    entity-group-reader CDATA #REQUIRED
+>
+    <!ELEMENT group-map EMPTY>
+    <!ATTLIST group-map 
+        group-name CDATA #REQUIRED
+        datasource-name CDATA #REQUIRED
+    >
+
+<!ELEMENT entity-model-reader ( resource* )>
+<!ATTLIST entity-model-reader
+    name CDATA #REQUIRED
+>
+    <!ELEMENT resource EMPTY>
+    <!ATTLIST resource
+        loader CDATA #REQUIRED
+        location CDATA #REQUIRED
+    >
+
+<!ELEMENT entity-group-reader EMPTY>
+<!ATTLIST entity-group-reader
+    name CDATA #REQUIRED
+    loader CDATA #REQUIRED
+    location CDATA #REQUIRED
+>
+
+<!ELEMENT field-type EMPTY>
+<!ATTLIST field-type
+    name CDATA #REQUIRED
+    loader CDATA #REQUIRED
+    location CDATA #REQUIRED
+>
+
+<!ELEMENT datasource ANY>
+<!-- main subelements of datasource are (sql-load-path*, (inline-jdbc | jndi-jdbc | tyrex-dataSource | ANY), but ANY must be used alone for certain XML parsers -->
+<!ATTLIST datasource
+    name CDATA #REQUIRED
+    helper-class CDATA #REQUIRED
+    field-type-name CDATA #REQUIRED
+    check-on-start ( true | false ) "true"
+    add-missing-on-start ( true | false ) "false"
+    use-foreign-keys ( true | false ) "true"
+    use-foreign-key-indices ( true | false ) "true"
+    check-fks-on-start ( true | false ) "false"
+    check-fk-indices-on-start ( true | false ) "false"
+    use-pk-constraint-names ( true | false ) "true"
+    constraint-name-clip-length CDATA "30"
+    fk-style ( name_constraint | name_fk ) "name_constraint"
+    use-fk-initially-deferred ( true | false ) "true"
+    join-style ( ansi | theta-oracle | theta-mssql ) "ansi"
+>
+    <!ELEMENT sql-load-path EMPTY>
+    <!ATTLIST sql-load-path
+        path CDATA #REQUIRED
+        prepend-env CDATA #IMPLIED
+    >
+    <!ELEMENT inline-jdbc EMPTY>
+    <!ATTLIST inline-jdbc
+        jdbc-driver CDATA #REQUIRED
+        jdbc-uri CDATA #REQUIRED
+        jdbc-username CDATA #REQUIRED
+        jdbc-password CDATA #REQUIRED
+        isolation-level ( None | ReadCommitted | ReadUncommitted | RepeatableRead | Serializable ) "Serializable"
+    >
+    <!ELEMENT jndi-jdbc EMPTY>
+    <!ATTLIST jndi-jdbc
+        jndi-server-name CDATA #REQUIRED
+        jndi-name CDATA #REQUIRED
+        isolation-level ( None | ReadCommitted | ReadUncommitted | RepeatableRead | Serializable ) #IMPLIED
+    >
+    <!ELEMENT tyrex-dataSource EMPTY>
+    <!ATTLIST tyrex-dataSource
+        dataSource-name CDATA #REQUIRED
+        isolation-level ( None | ReadCommitted | ReadUncommitted | RepeatableRead | Serializable ) #IMPLIED
+    >

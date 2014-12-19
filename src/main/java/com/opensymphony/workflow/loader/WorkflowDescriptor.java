@@ -6,17 +6,17 @@ package com.opensymphony.workflow.loader;
 
 import com.opensymphony.workflow.InvalidWorkflowDescriptorException;
 import com.opensymphony.workflow.util.Validatable;
-
-import org.w3c.dom.*;
-
-import org.xml.sax.*;
-
-import java.io.*;
-
-import java.util.*;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.*;
 
 /**
  * Describes a single workflow
@@ -28,7 +28,7 @@ public class WorkflowDescriptor extends AbstractDescriptor implements Validatabl
 	// /////////////////////////////////////////////
 
 	public static final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-	public static final String DOCTYPE_DECL = "<!DOCTYPE workflow PUBLIC \"-//OpenSymphony Group//DTD OSWorkflow 2.8//EN\" \"http://www.opensymphony.com/osworkflow/workflow_2_8.dtd\">";
+	public static final String DOCTYPE_DECL = "<!DOCTYPE workflow PUBLIC \"-//OpenSymphony Group//DTD OSWorkflow 2.6//EN\" \"dtds/workflow_2_8.dtd\">";
 
 	// ~ Instance fields
 	// ////////////////////////////////////////////////////////

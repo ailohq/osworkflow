@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="osworkflow" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="com.trunkplatform" external.system.module.version="0.0.1" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="osworkflow" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="com.trunkplatform" external.system.module.version="2.7.1" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
-    <facet type="web" name="Web Gradle : osworkflow-0.0.1.war">
+    <facet type="web" name="Web Gradle : osworkflow-2.7.1.war">
       <configuration>
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
