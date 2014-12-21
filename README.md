@@ -1,6 +1,6 @@
 # OpenSymphony workflow
 
-Revamped version of the OpenSymphony workflow project. Built using a combination of Jcenter Mirror and
+Revamped version of the OpenSymphony workflow project based on the 3.0 code base. Built using a combination of Jcenter Mirror and
 uploaded jar.
 
 <a href='https://bintray.com/trunkplatform/osworkflow/osworkflow/view?source=watch' alt='Get automatic notifications about new "osworkflow" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
