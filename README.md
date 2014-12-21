@@ -65,6 +65,10 @@ Certain guesses were made in regards to the versions of certain dependencies whi
  * jdbc: 2.0
  * stax: 1.2.0
 
+ * jta
+ * simple-jndi
+ * commons-*
+
 Removed transitive/unused dependencies:
 
  * com.sun.mail
