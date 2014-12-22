@@ -23,14 +23,22 @@ uploaded jar.
 
     <dependencies>
         <dependency>
-            <groupId>osworkflow</groupId>
+            <groupId>com.trunkplatform.opensymphony</groupId>
             <artifactId>osworkflow</artifactId>
-            <version>2.7.1</version>
+            <version>3.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
 
 ### Gradle
+
+    repositories {
+        jcenter()
+        maven { url "http://dl.bintray.com/trunkplatform/osworkflow" }
+    }
+    dependencies {
+        compile group: 'com.trunkplatform.opensymphony', name: 'osworkflow', version: '3.1.0'
+    }
 
 ## Build
 
@@ -59,30 +67,4 @@ To ease maintenance, removed support for the following workflow features:
  * Hibernate
  * Prevayler
  * JMS
-
-## Library Dependencies
-
-Certain guesses were made in regards to the versions of certain dependencies which were available in JCenter:
-
- * opensymphony propertyset:1.5
- * ostermiller-syntax:1.1.1
- * opensymphony: 2.1.7
- * jdbc: 2.0
- * stax: 1.2.0
-
- * jta
- * simple-jndi
- * commons-*
-
-Removed transitive/unused dependencies:
-
- * com.sun.mail
- * aelfred
- * activation 1.1
- * glue_stub
-
-
-Other jars which we are not sure of have been uploaded to [bintray](https://bintray.com/trunkplatform/osworkflow)
-
-
 
