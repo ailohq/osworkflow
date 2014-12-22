@@ -44,10 +44,8 @@
     <orderEntry type="library" exported="" name="Gradle: xalan:xalan:2.6.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.ccil.cowan.tagsoup:tagsoup:0.9.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xml-apis:xml-apis:2.0.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: cglib:cglib:unknown" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jgoodies:forms:1.0.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: glue_stub:glue_stub:unknown" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: javax.net:jnet:unknown" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.sql:jdbc-stdext:2.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jgraph:jgraph:1.0.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: mckoi:mckoi:1.0.2" level="project" />
@@ -107,7 +105,6 @@
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-aop:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-expression:3.2.8.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: bsf:bsf:unknown" level="project" />
     <orderEntry type="library" exported="" name="Gradle: bsh:bsh:1.2b7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: opensymphony:webwork:1.4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: opensymphony:xwork:1.0" level="project" />
@@ -117,5 +114,9 @@
     <orderEntry type="library" exported="" name="Gradle: simple-jndi:simple-jndi:0.7-dev-1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: xerces:xerces:2.0.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-pool:commons-pool:1.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: bsf:bsf:2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: cglib:cglib:2.2.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jboss:jnet:3.2.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: asm:asm:3.3.1" level="project" />
   </component>
 </module>

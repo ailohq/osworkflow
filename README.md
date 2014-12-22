@@ -54,6 +54,11 @@ To ease maintenance, removed support for the following workflow features:
  * EJB
  * SOAP
  * Ofbiz
+ * SendEmail
+ * Spring
+ * Hibernate
+ * Prevayler
+ * JMS
 
 ## Library Dependencies
 
@@ -74,6 +79,7 @@ Removed transitive/unused dependencies:
  * com.sun.mail
  * aelfred
  * activation 1.1
+ * glue_stub
 
 
 Other jars which we are not sure of have been uploaded to [bintray](https://bintray.com/trunkplatform/osworkflow)
