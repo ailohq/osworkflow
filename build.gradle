@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.trunkplatform.opensymphony'
-version = '3.1.0'
+version = '3.1.3'
 
 description = "bare minimum OpenSymphony Workflow based on 3.0 code base"
 
@@ -30,6 +30,9 @@ dependencies {
     compile group: 'opensymphony', name: 'propertyset', version: '1.5'
     compile group: 'opensymphony', name: 'webwork', version: '1.4'
     compile group: 'opensymphony', name: 'xwork', version: '1.0'
+
+    // spring
+    compile group: 'org.springframework', name: 'spring-context', version: '3.2.8.RELEASE'
 
     // war
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
