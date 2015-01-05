@@ -4,7 +4,7 @@ Revamped version of the OpenSymphony workflow project based on the 3.0 code base
 uploaded jar.
 
 <a href='https://bintray.com/trunkplatform/osworkflow/osworkflow/view?source=watch' alt='Get automatic notifications about new "osworkflow" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
-[ ![Download](https://api.bintray.com/packages/trunkplatform/osworkflow/osworkflow/images/download.svg) ](https://bintray.com/trunkplatform/osworkflow/osworkflow/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/trunkplatform/osworkflow/trunkplatform%3Aosworkflow/images/download.svg) ](https://bintray.com/trunkplatform/osworkflow/trunkplatform%3Aosworkflow/_latestVersion)
 
 ## Usage
 
