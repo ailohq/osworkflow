@@ -7,7 +7,7 @@ plugins {
 }
 
 group = 'com.trunkplatform.opensymphony'
-version = '3.1.4'
+version = project.hasProperty('app_version') ? app_version : 'local'
 
 description = "bare minimum OpenSymphony Workflow based on 3.0 code base"
 
@@ -75,6 +75,10 @@ publishing {
             }
         }
     }
+}
+
+javadoc {
+    failOnError = false
 }
 
 bintray {
