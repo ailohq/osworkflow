@@ -3,6 +3,7 @@
 Revamped version of the OpenSymphony workflow project based on the 3.0 code base. Built using a combination of Jcenter Mirror and
 uploaded jar.
 
+[![Build Status](https://snap-ci.com/2lrHYhAIg7tK9H5PVD2f5vpUisWBs2yO5ZBQDtK5KXw/build_image)](https://snap-ci.com/Trunkplatform/osworkflow/branch/master)
 <a href='https://bintray.com/trunkplatform/osworkflow/osworkflow/view?source=watch' alt='Get automatic notifications about new "osworkflow" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 [ ![Download](https://api.bintray.com/packages/trunkplatform/osworkflow/trunkplatform%3Aosworkflow/images/download.svg) ](https://bintray.com/trunkplatform/osworkflow/trunkplatform%3Aosworkflow/_latestVersion)
 
